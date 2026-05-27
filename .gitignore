@@ -1,0 +1,4 @@
+# Markdown — ignore all except README.md
+*.md
+!README.md
+!**/README.md
