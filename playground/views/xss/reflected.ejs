@@ -1,0 +1,18 @@
+<% const body = `
+  <section class="lab-exercise">
+    <h1>Reflected XSS</h1>
+    <p class="lab-probe">
+      <strong>Probe:</strong> The <code>q</code> parameter is echoed below without encoding.
+      Try <code>/xss/reflected?q=&lt;script&gt;alert(1)&lt;/script&gt;</code> or use the search box.
+    </p>
+    <form class="lab-form" method="get" action="/xss/reflected">
+      <label>Search <input name="q" value="${String(q).replace(/&/g, '&amp;').replace(/"/g, '&quot;')}" placeholder="test"></label>
+      <button type="submit">Search</button>
+    </form>
+    <h2>Results for your query</h2>
+    <p>You searched for: ${q}</p>
+    <p class="hint">View page source — the payload appears verbatim in HTML.</p>
+    <p class="exercise-nav"><a href="/xss/">← XSS</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

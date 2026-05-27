@@ -1,0 +1,36 @@
+<% const rowsHtml = results.length
+  ? `<table>
+      <thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th></tr></thead>
+      <tbody>
+        ${results.map(r => `
+          <tr>
+            <td>${r.id}</td>
+            <td>${r.username}</td>
+            <td>${r.email || ''}</td>
+            <td>${r.role}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>`
+  : '<p class="hint">No rows (try <code>id=1</code> or a tautology payload).</p>';
+
+const body = `
+  <section class="lab-exercise">
+    <h1>SQL injection</h1>
+    <p class="lab-probe">
+      <strong>Probe:</strong> The <code>id</code> or <code>q</code> query parameter is concatenated into the SQL string below (no bound parameters).
+      Try <code>?id=1</code>, then <code>?id=1 OR 1=1</code> or <code>?id=1 UNION SELECT 1,username,password,role FROM users--</code>.
+    </p>
+    <form class="lab-form" method="get" action="/injection/sql">
+      <label>User id <input name="id" value="${input}" placeholder="1"></label>
+      <button type="submit">Lookup</button>
+    </form>
+    <h2>Executed query</h2>
+    <pre class="lab-query"><code>${query}</code></pre>
+    ${error ? `<p class="lab-error">SQLite error: ${error}</p>` : ''}
+    <h2>Results</h2>
+    ${rowsHtml}
+    <p class="exercise-nav"><a href="/injection/">← Injection</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>
