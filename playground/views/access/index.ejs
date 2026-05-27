@@ -1,0 +1,11 @@
+<% const body = `
+  <section class="lab-module">
+    <h1>Broken Access Control</h1>
+    <p class="lab-warning">
+      The admin panel only checks that <em>some</em> session exists — not <code>role=admin</code>.
+      Log in as a normal user and open the admin URL.
+    </p>
+    <p><a href="/access/admin">Admin panel</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

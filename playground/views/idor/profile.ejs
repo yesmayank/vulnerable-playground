@@ -1,0 +1,23 @@
+<% const profileBlock = profile ? `
+  <dl class="profile-dl">
+    <dt>ID</dt><dd>${profile.id}</dd>
+    <dt>Username</dt><dd>${profile.username}</dd>
+    <dt>Email</dt><dd>${profile.email || '—'}</dd>
+    <dt>Role</dt><dd>${profile.role}</dd>
+    <dt>Created</dt><dd>${profile.created_at}</dd>
+  </dl>
+` : ''; %>
+<% const body = `
+  <section class="lab-module">
+    <h1>User profile</h1>
+    <p class="lab-warning">IDOR: no check that <code>userId=${requestedUserId || '?'}</code> belongs to your session.</p>
+    ${sessionUser ? `<p>Your session: <strong>${sessionUser.username}</strong> (id ${sessionUser.id})</p>` : '<p>Not logged in — profile still loads by id.</p>'}
+    ${error ? `<p class="lab-error">${error}</p>` : profileBlock}
+    <form class="lab-form" method="get" action="/idor/profile">
+      <label>userId <input name="userId" type="number" min="1" value="${requestedUserId || ''}" placeholder="1"></label>
+      <button type="submit">Load profile</button>
+    </form>
+    <p><a href="/idor/">← Module home</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

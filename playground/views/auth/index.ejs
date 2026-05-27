@@ -1,0 +1,15 @@
+<% const body = `
+  <section class="lab-module">
+    <h1>Broken Authentication</h1>
+    <p class="lab-warning">
+      Lab module: weak login, plaintext password comparison, no account lockout,
+      and a session cookie that is readable from JavaScript (<code>httpOnly: false</code>).
+    </p>
+    <ul class="lab-links">
+      <li><a href="/auth/login">Login</a></li>
+      <li><a href="/auth/register">Register (stub)</a></li>
+      ${sessionUser ? `<li>Logged in as <strong>${sessionUser.username}</strong> (<a href="/auth/logout">logout</a>)</li>` : ''}
+    </ul>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>
