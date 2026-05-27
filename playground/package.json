@@ -1,0 +1,20 @@
+{
+  "name": "vulnerable-playground-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Intentionally vulnerable security lab — local use only",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1"
+  }
+}

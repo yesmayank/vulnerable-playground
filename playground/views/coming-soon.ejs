@@ -1,0 +1,17 @@
+<% const basePath = (path || '').replace(/\/?$/, '');
+let topicsHtml = '';
+if (topics && topics.length) {
+  topicsHtml = '<h2>Planned topics</h2><ul>' + topics.map(function (t) {
+    return '<li><a href="' + basePath + '/' + t + '">' + t + '</a> — coming soon</li>';
+  }).join('') + '</ul>';
+}
+const body = `
+  <section class="coming-soon">
+    <h1>${moduleName}</h1>
+    <p>${message}</p>
+    <p><code>${path}</code></p>
+    ${topicsHtml}
+    <p><a href="/">← Back to lab home</a></p>
+  </section>
+`; %>
+<%- include('layout', { title, modules, body }) %>

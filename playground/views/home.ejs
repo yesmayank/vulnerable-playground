@@ -1,0 +1,39 @@
+<% const body = `
+  <section class="lab-hero">
+    <h1>Security Lab</h1>
+    <p class="lab-warning">
+      This application is an <strong>intentionally vulnerable</strong> training environment.
+      Use only on <code>127.0.0.1</code> with Docker. All users and secrets are fake lab fiction.
+    </p>
+  </section>
+
+  <section class="lab-grid">
+    <h2>Modules</h2>
+    <ul class="module-cards">
+      ${modules.map(mod => `
+        <li>
+          <a href="${mod.basePath}/">
+            <span class="module-slug">${mod.slug}</span>
+            <span class="module-label">${mod.label}</span>
+          </a>
+        </li>
+      `).join('')}
+    </ul>
+  </section>
+
+  <section class="lab-users">
+    <h2>Seeded lab users (fiction)</h2>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Username</th><th>Role</th></tr>
+      </thead>
+      <tbody>
+        ${users.map(u => `
+          <tr><td>${u.id}</td><td>${u.username}</td><td>${u.role}</td></tr>
+        `).join('')}
+      </tbody>
+    </table>
+    <p class="hint">Passwords are documented in seed SQL for later auth exercises (e.g. alice / password).</p>
+  </section>
+`; %>
+<%- include('layout', { title, modules, body }) %>

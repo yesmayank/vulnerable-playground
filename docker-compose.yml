@@ -1,0 +1,17 @@
+services:
+  playground:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:${PORT:-3000}:3000"
+    environment:
+      PORT: "3000"
+      SESSION_SECRET: ${SESSION_SECRET:-change-in-lab-only}
+      NODE_ENV: ${NODE_ENV:-development}
+      DATABASE_PATH: /app/playground/data/lab.db
+    volumes:
+      - playground-data:/app/playground/data
+
+volumes:
+  playground-data:

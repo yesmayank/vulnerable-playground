@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title : 'Vulnerable Playground' %></title>
+  <link rel="stylesheet" href="/public/css/lab.css">
+</head>
+<body>
+  <header class="lab-banner" role="alert">
+    <strong>INTENTIONALLY VULNERABLE — DO NOT DEPLOY</strong>
+    <span class="lab-banner-sub">Local security lab only. Fake credentials. Never expose to the internet.</span>
+  </header>
+
+  <nav class="lab-nav">
+    <a class="lab-brand" href="/">Vulnerable Playground Lab</a>
+    <% if (typeof modules !== 'undefined' && modules.length) { %>
+      <ul class="lab-nav-modules">
+        <% modules.forEach(function(mod) { %>
+          <li><a href="<%= mod.basePath %>/"><%= mod.label %></a></li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </nav>
+
+  <main class="lab-main">
+    <%- body %>
+  </main>
+
+  <footer class="lab-footer">
+    <p>OWASP-style training playground — fiction data only.</p>
+  </footer>
+</body>
+</html>
