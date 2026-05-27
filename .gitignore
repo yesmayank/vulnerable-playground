@@ -1,0 +1,10 @@
+# Markdown — ignore all except README.md
+*.md
+!README.md
+!**/README.md
+
+# Cursor config and scripts
+.cursor/
+*.mdc
+*.json
+*.sh
