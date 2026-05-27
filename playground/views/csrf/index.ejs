@@ -1,0 +1,14 @@
+<% const body = `
+  <section class="lab-module">
+    <h1>Cross-Site Request Forgery</h1>
+    <p class="lab-warning">
+      State-changing actions accept POST requests with no CSRF token, synchronizer cookie, or Origin check.
+    </p>
+    <ul class="lab-links">
+      <li><a href="/csrf/transfer">Balance transfer</a> — POST <code>amount</code> and <code>to</code> without anti-CSRF controls</li>
+    </ul>
+    ${sessionUser ? `<p>Session: logged in as <strong>${sessionUser.username}</strong>. Transfers debit that account.</p>` : '<p>No login required — transfers run as <strong>alice</strong> by default.</p>'}
+    <p><a href="/auth/login">Login</a> to bind transfers to another lab user.</p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

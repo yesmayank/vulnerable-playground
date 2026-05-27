@@ -1,0 +1,31 @@
+<% const listHtml = comments.length
+  ? `<ul class="guestbook-list">
+      ${comments.map(c => `
+        <li>
+          <span class="guestbook-meta">#${c.id} · ${c.author} · ${c.created_at}</span>
+          <div class="guestbook-body">${c.body}</div>
+        </li>
+      `).join('')}
+    </ul>`
+  : '<p class="hint">No comments yet — post one below.</p>';
+
+const body = `
+  <section class="lab-exercise">
+    <h1>Stored XSS (guestbook)</h1>
+    <p class="lab-probe">
+      <strong>Probe:</strong> Comments are saved and listed without HTML encoding. Post
+      <code>&lt;script&gt;alert('stored')&lt;/script&gt;</code> or an image onerror payload; reload to trigger for every visitor.
+    </p>
+    <form class="lab-form" method="post" action="/xss/stored">
+      <label>Name <input name="author" value="guest" maxlength="40"></label>
+      <label>Comment
+        <textarea name="comment" rows="3" cols="60" placeholder="Hello lab"></textarea>
+      </label>
+      <button type="submit">Post</button>
+    </form>
+    <h2>Guestbook</h2>
+    ${listHtml}
+    <p class="exercise-nav"><a href="/xss/">← XSS</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

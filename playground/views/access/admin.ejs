@@ -1,0 +1,16 @@
+<% const body = `
+  <section class="lab-module admin-panel">
+    <h1>Admin panel</h1>
+    <p class="lab-warning">
+      Broken access control: you reached this page as <strong>${sessionUser.username}</strong>
+      (role: <code>${sessionUser.role}</code>) — no admin role was required.
+    </p>
+    <ul>
+      <li>Fake user management (not implemented)</li>
+      <li>Fake system settings (not implemented)</li>
+    </ul>
+    <p>Try <code>GET /access/admin</code> after logging in as <code>alice</code> (user role).</p>
+    <p><a href="/access/">← Module home</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

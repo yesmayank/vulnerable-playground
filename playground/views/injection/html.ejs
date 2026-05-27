@@ -1,0 +1,24 @@
+<% const preview = html
+  ? `<div class="lab-preview">${html}</div>`
+  : '<p class="hint">Submit markup to see it rendered as HTML (not escaped).</p>';
+
+const body = `
+  <section class="lab-exercise">
+    <h1>HTML injection</h1>
+    <p class="lab-probe">
+      <strong>Probe:</strong> Your input is inserted into the page without encoding. Try
+      <code>&lt;img src=x onerror=alert(1)&gt;</code> or <code>&lt;script&gt;alert('html')&lt;/script&gt;</code>
+      via GET <code>?html=...</code> or the form below.
+    </p>
+    <form class="lab-form" method="post" action="/injection/html">
+      <label>HTML snippet
+        <textarea name="html" rows="4" cols="60" placeholder="<b>bold</b>">${html.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+      </label>
+      <button type="submit">Render</button>
+    </form>
+    <h2>Rendered output</h2>
+    ${preview}
+    <p class="exercise-nav"><a href="/injection/">← Injection</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

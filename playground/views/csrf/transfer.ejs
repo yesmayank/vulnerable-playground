@@ -1,0 +1,32 @@
+<% const walletRows = Object.keys(wallet).map(function (name) {
+  return '<tr><td>' + name + '</td><td>' + wallet[name] + ' credits</td></tr>';
+}).join('');
+const msgHtml = message ? '<p class="lab-success">' + message + '</p>' : '';
+const errHtml = error ? '<p class="lab-error">' + error + '</p>' : '';
+const userOptions = labUsers.filter(function (u) { return u !== from; }).map(function (u) {
+  return '<option value="' + u + '">' + u + '</option>';
+}).join('');
+const body = `
+  <section class="lab-exercise">
+    <h1>Balance transfer (CSRF)</h1>
+    <p class="hint">Transfers run as <strong>${from}</strong>. This form has <em>no CSRF token</em> — any site can POST on your behalf while your session is active.</p>
+    ${msgHtml}
+    ${errHtml}
+    <table class="lab-table">
+      <thead><tr><th>Account</th><th>Balance</th></tr></thead>
+      <tbody>${walletRows}</tbody>
+    </table>
+    <form method="post" action="/csrf/transfer" class="lab-form">
+      <label>To recipient
+        <select name="to">${userOptions}</select>
+      </label>
+      <label>Amount
+        <input type="number" name="amount" min="1" value="100" required>
+      </label>
+      <button type="submit">Transfer (no CSRF protection)</button>
+    </form>
+    <pre class="lab-curl">curl -X POST http://127.0.0.1:3000/csrf/transfer -d 'amount=100&amp;to=bob' -H 'Content-Type: application/x-www-form-urlencoded'</pre>
+    <p><a href="/csrf/">← CSRF module</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

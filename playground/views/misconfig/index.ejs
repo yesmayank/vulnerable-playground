@@ -1,0 +1,13 @@
+<% const body = `
+  <section class="lab-module">
+    <h1>Security Misconfiguration</h1>
+    <p class="lab-warning">
+      Debug features and verbose errors leak implementation detail when misconfigured for production.
+    </p>
+    <ul class="lab-links">
+      <li><a href="/misconfig/debug">Debug endpoint</a> — verbose output when <code>DEBUG=true</code></li>
+    </ul>
+    <p>DEBUG is currently <strong>${debugEnabled ? 'enabled' : 'disabled'}</strong> in this container.</p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

@@ -6,5 +6,19 @@
 # Cursor config and scripts
 .cursor/
 *.mdc
-*.json
 *.sh
+
+# JSON — ignore generated/config noise; allow package manifests
+*.json
+!package.json
+!package-lock.json
+!playground/package.json
+!playground/package-lock.json
+
+# Dependencies and runtime data
+node_modules/
+playground/node_modules/
+playground/data/
+
+# Local secrets
+.env

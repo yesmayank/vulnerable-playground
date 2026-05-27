@@ -1,0 +1,12 @@
+<% const body = `
+  <section class="lab-module">
+    <h1>Insecure Direct Object Reference (IDOR)</h1>
+    <p class="lab-warning">
+      The profile endpoint loads any user by <code>userId</code> query parameter.
+      It does not verify that the requested id matches the logged-in user.
+    </p>
+    <p>Example: <a href="/idor/profile?userId=2"><code>/idor/profile?userId=2</code></a> (Bob while logged in as Alice).</p>
+    <p><a href="/auth/login">Login</a> first for a realistic session, then change <code>userId</code>.</p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

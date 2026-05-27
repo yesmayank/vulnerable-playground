@@ -1,0 +1,8 @@
+.git
+.cursor
+node_modules
+playground/node_modules
+playground/data
+.env
+*.md
+!README.md

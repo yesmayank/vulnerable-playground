@@ -1,0 +1,25 @@
+<% const targetsHtml = safeTargets.map(function (t) {
+  return '<li><code>' + t.url + '</code></li>';
+}).join('');
+const resultHtml = error
+  ? '<p class="lab-error">Fetch failed: ' + error + '</p>'
+  : (bodyPreview !== null
+    ? '<p>HTTP <strong>' + status + '</strong> — Content-Type: <code>' + (contentType || 'unknown') + '</code></p><pre class="lab-output">' + bodyPreview.replace(/</g, '&lt;') + '</pre>'
+    : '');
+const body = `
+  <section class="lab-exercise">
+    <h1>SSRF — server-side fetch</h1>
+    <p class="hint">The application requests the URL server-side. Stick to <strong>127.0.0.1</strong> or <strong>localhost</strong> on port 3000 for exercises.</p>
+    <form method="get" action="/ssrf/fetch" class="lab-form">
+      <label>URL to fetch
+        <input type="url" name="url" value="${url}" placeholder="http://127.0.0.1:3000/" size="60">
+      </label>
+      <button type="submit">Fetch from server</button>
+    </form>
+    <h2>Localhost-only suggestions</h2>
+    <ul>${targetsHtml}</ul>
+    ${resultHtml}
+    <p><a href="/ssrf/">← SSRF module</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

@@ -1,0 +1,15 @@
+<% const body = `
+  <section class="lab-exercise">
+    <h1>Cross-Site Scripting (XSS)</h1>
+    <p class="hint">Untrusted input is reflected or stored and interpreted as HTML/JavaScript in the browser.</p>
+    <nav class="exercise-nav">
+      <ul>
+        ${exercises.map(ex => `
+          <li><a href="${ex.path}">${ex.label}</a></li>
+        `).join('')}
+      </ul>
+    </nav>
+    <p><a href="/">← Lab home</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

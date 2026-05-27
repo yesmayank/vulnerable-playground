@@ -1,0 +1,12 @@
+<% const body = `
+  <section class="lab-module">
+    <h1>Sensitive Data Exposure</h1>
+    <p class="lab-warning">
+      Configuration and secrets must not be served to clients. This lab exposes a JSON document with <em>fake</em> credential-shaped fields for training.
+    </p>
+    <ul class="lab-links">
+      <li><a href="/exposure/config">/exposure/config</a> — returns JSON with placeholder keys (no real credentials)</li>
+    </ul>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

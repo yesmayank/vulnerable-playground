@@ -1,0 +1,15 @@
+<% const body = `
+  <section class="lab-exercise">
+    <h1>Injection</h1>
+    <p class="hint">Classic input-handling flaws: untrusted data becomes part of a query or markup without validation.</p>
+    <nav class="exercise-nav">
+      <ul>
+        ${exercises.map(ex => `
+          <li><a href="${ex.path}">${ex.label}</a></li>
+        `).join('')}
+      </ul>
+    </nav>
+    <p><a href="/">← Lab home</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

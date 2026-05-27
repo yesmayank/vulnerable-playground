@@ -1,0 +1,31 @@
+<% const credRows = labCredentials.map(c => `
+  <tr><td><code>${c.username}</code></td><td><code>${c.password}</code></td><td>${c.role}</td></tr>
+`).join(''); %>
+<% const body = `
+  <section class="lab-module">
+    <h1>Login</h1>
+    <p class="lab-warning">
+      Passwords are stored and compared in <strong>plaintext</strong>. There is no rate limiting or lockout.
+      Session secret defaults to a predictable env value (<code>SESSION_SECRET</code>).
+    </p>
+
+    ${success ? '<p class="lab-success">Logged in. Session cookie set (inspect in DevTools — not httpOnly).</p>' : ''}
+    ${error ? `<p class="lab-error">${error}</p>` : ''}
+    ${sessionUser ? `<p>Current session: <strong>${sessionUser.username}</strong> (role: ${sessionUser.role})</p>` : ''}
+
+    <form class="lab-form" method="post" action="/auth/login">
+      <label>Username <input name="username" type="text" autocomplete="username" required></label>
+      <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
+      <button type="submit">Sign in</button>
+    </form>
+
+    <h2>Lab credentials (fiction)</h2>
+    <table>
+      <thead><tr><th>Username</th><th>Password</th><th>Role</th></tr></thead>
+      <tbody>${credRows}</tbody>
+    </table>
+    <p class="hint">Try logging in as <code>alice</code> / <code>password</code>, then visit IDOR or admin exercises.</p>
+    <p><a href="/auth/">← Module home</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>
