@@ -1,0 +1,17 @@
+<% const targetsHtml = safeTargets.map(function (t) {
+  return '<li><a href="/ssrf/fetch?url=' + encodeURIComponent(t.url) + '">' + t.label + '</a> — <code>' + t.url + '</code></li>';
+}).join('');
+const body = `
+  <section class="lab-module">
+    <h1>Server-Side Request Forgery</h1>
+    <p class="lab-warning">
+      The server fetches any URL you supply. For this lab, use <strong>localhost / 127.0.0.1</strong> targets only — do not aim at production networks.
+    </p>
+    <ul class="lab-links">
+      <li><a href="/ssrf/fetch">URL fetcher</a> — <code>GET /ssrf/fetch?url=</code></li>
+    </ul>
+    <h2>Safe example targets</h2>
+    <ul>${targetsHtml}</ul>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>

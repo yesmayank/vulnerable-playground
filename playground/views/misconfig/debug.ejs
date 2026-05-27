@@ -1,0 +1,23 @@
+<% let detailHtml = '';
+if (debugEnabled && fakeEnv) {
+  const envLines = Object.keys(fakeEnv).map(function (k) {
+    return k + '=' + fakeEnv[k];
+  }).join('\n');
+  detailHtml = `
+    <p class="lab-error">DEBUG mode is ON — fictional environment snapshot follows (not real credentials):</p>
+    <pre class="lab-output">${envLines.replace(/</g, '&lt;')}</pre>
+    <h2>Stack trace</h2>
+    <pre class="lab-output">${(stack || '').replace(/</g, '&lt;')}</pre>
+  `;
+} else {
+  detailHtml = `<p class="lab-warning">${hint}</p>`;
+}
+const body = `
+  <section class="lab-exercise">
+    <h1>Debug / verbose errors</h1>
+    <p class="hint">Production systems should never expose stack traces or configuration dumps. This lab toggles verbosity with the <code>DEBUG</code> environment variable.</p>
+    ${detailHtml}
+    <p><a href="/misconfig/">← Misconfiguration module</a></p>
+  </section>
+`; %>
+<%- include('../layout', { title, modules, body }) %>
